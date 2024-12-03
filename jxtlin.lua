@@ -1153,7 +1153,8 @@ local script = G2L["46"];
 	frame.InputBegan:Connect(function(input, gameProcessedEvent)
 		if gameProcessedEvent then return end  -- Ignore input if it's already being processed
 	
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then  -- If left mouse button is pressed
+		-- Check for both mouse (left button) and touch
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
 			dragStart = input.Position
 			startPos = frame.Position
@@ -1162,7 +1163,7 @@ local script = G2L["46"];
 	
 	-- Function to update the frame's position while dragging
 	userInputService.InputChanged:Connect(function(input)
-		if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
 			local delta = input.Position - dragStart
 			frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 		end
@@ -1170,7 +1171,7 @@ local script = G2L["46"];
 	
 	-- Function to stop dragging the frame
 	userInputService.InputEnded:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = false
 		end
 	end)
@@ -1205,7 +1206,8 @@ local script = G2L["4a"];
 	frame.InputBegan:Connect(function(input, gameProcessedEvent)
 		if gameProcessedEvent then return end  -- Ignore input if it's already being processed
 	
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then  -- If left mouse button is pressed
+		-- Check for both mouse (left button) and touch
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
 			dragStart = input.Position
 			startPos = frame.Position
@@ -1214,7 +1216,7 @@ local script = G2L["4a"];
 	
 	-- Function to update the frame's position while dragging
 	userInputService.InputChanged:Connect(function(input)
-		if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
 			local delta = input.Position - dragStart
 			frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 		end
@@ -1222,7 +1224,7 @@ local script = G2L["4a"];
 	
 	-- Function to stop dragging the frame
 	userInputService.InputEnded:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = false
 		end
 	end)
