@@ -979,7 +979,6 @@ local script = G2L["1c"];
 				GuiService.SelectedObject = Descendant
 				VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
 				VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
-				task.wait(0.1)
 				GuiService.SelectedObject = nil
 				-- When the 'playerbar' is added to the 'bar' parent
 			elseif Descendant.Name == 'playerbar' and Descendant.Parent.Name == 'bar' then
