@@ -273,9 +273,9 @@ G2L["1b"] = Instance.new("UICorner", G2L["1a"]);
 G2L["1b"]["CornerRadius"] = UDim.new(0, 100);
 
 
--- StarterGui.ScreenGui.MainFrame.FishFrame.Auto Shake.TextButton.LocalScript
+-- StarterGui.ScreenGui.MainFrame.FishFrame.Auto Shake.TextButton.AutoShakeScript
 G2L["1c"] = Instance.new("LocalScript", G2L["1a"]);
-
+G2L["1c"]["Name"] = [[AutoShakeScript]];
 
 
 -- StarterGui.ScreenGui.MainFrame.FishFrame.Auto Farm
@@ -913,7 +913,7 @@ local script = G2L["12"];
 	
 end;
 task.spawn(C_12);
--- StarterGui.ScreenGui.MainFrame.FishFrame.Auto Shake.TextButton.LocalScript
+-- StarterGui.ScreenGui.MainFrame.FishFrame.Auto Shake.TextButton.AutoShakeScript
 local function C_1c()
 local script = G2L["1c"];
 	-- Services
@@ -976,7 +976,7 @@ local script = G2L["1c"];
 		if Enabled then
 			-- When a 'button' is added to the 'safezone' parent
 			if Descendant.Name == 'button' and Descendant.Parent.Name == 'safezone' then
-				task.wait(0.3)
+				task.wait(0.1)
 				GuiService.SelectedObject = Descendant
 				VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
 				VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
@@ -985,8 +985,7 @@ local script = G2L["1c"];
 				-- When the 'playerbar' is added to the 'bar' parent
 			elseif Descendant.Name == 'playerbar' and Descendant.Parent.Name == 'bar' then
 				Finished = true
-				Descendant:GetPropertyChangedSignal('Position'):Wait()
-				ReplicatedStorage.events.reelfinished:FireServer(100, true)
+				-- Removed Position tracking and reelfinished event firing
 			end
 		end
 	end)
