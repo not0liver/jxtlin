@@ -918,9 +918,10 @@ local function C_1c()
 local script = G2L["1c"];
 	-- Services
 	local Players = game:GetService('Players')
+	local CoreGui = game:GetService('StarterGui')
 	local GuiService = game:GetService('GuiService')
-	local VirtualInputManager = game:GetService('VirtualInputManager')
 	local ReplicatedStorage = game:GetService('ReplicatedStorage')
+	local VirtualInputManager = game:GetService('VirtualInputManager')
 	
 	-- References and Variables
 	local LocalPlayer = Players.LocalPlayer
@@ -935,14 +936,21 @@ local script = G2L["1c"];
 	-- Function to handle button click
 	local function onButtonClick()
 		-- Toggle the button color
+		if isGreen then
+			button.BackgroundColor3 = defaultColor
+		else
+			button.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+		end
+		-- Toggle the state
 		isGreen = not isGreen
-		button.BackgroundColor3 = isGreen and Color3.fromRGB(0, 255, 0) or defaultColor
 	
 		-- Toggle the farm state (enable/disable)
 		Enabled = not Enabled
 	
-		-- Reset farming state when disabled
-		if not Enabled then
+		if Enabled then
+			-- Start farming logic
+		else
+			-- Reset farming state
 			Finished = false
 			Progress = false
 			GuiService.SelectedObject = nil
@@ -963,22 +971,26 @@ local script = G2L["1c"];
 		end
 	end)
 	
-	-- Listen for UI elements added to PlayerGui (optimized for checking only necessary elements)
+	-- Listen for UI elements added to PlayerGui
 	LocalPlayer.PlayerGui.DescendantAdded:Connect(function(Descendant)
 		if Enabled then
-			-- Directly check if it's the button in the safezone
+			-- When a 'button' is added to the 'safezone' parent
 			if Descendant.Name == 'button' and Descendant.Parent.Name == 'safezone' then
+				task.wait()
 				GuiService.SelectedObject = Descendant
 				VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
 				VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+				task.wait()
 				GuiService.SelectedObject = nil
+				-- When the 'playerbar' is added to the 'bar' parent
 			elseif Descendant.Name == 'playerbar' and Descendant.Parent.Name == 'bar' then
 				Finished = true
+				-- Removed Position tracking and reelfinished event firing
 			end
 		end
 	end)
 	
-	-- Listen for UI elements removed from PlayerGui (optimized for reel element)
+	-- Listen for UI elements removed from PlayerGui
 	LocalPlayer.PlayerGui.DescendantRemoving:Connect(function(Descendant)
 		if Descendant.Name == 'reel' then
 			Finished = false
