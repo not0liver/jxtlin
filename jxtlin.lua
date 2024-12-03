@@ -1,4 +1,13 @@
+--[=[
+ d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
+88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
+88      88    88    88            odD'      88      88    88 88ooo88 
+88  ooo 88    88    88          .88'        88      88    88 88~~~88 
+88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
+ Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
+]=]
 
+-- Instances: 16 | Scripts: 0 | Modules: 0 | Tags: 0
 local G2L = {};
 
 -- StarterGui.ScreenGui
@@ -20,14 +29,13 @@ G2L["3"] = Instance.new("ScrollingFrame", G2L["2"]);
 G2L["3"]["Active"] = true;
 G2L["3"]["BorderSizePixel"] = 0;
 G2L["3"]["CanvasSize"] = UDim2.new(0, 0, 1, 0);
-G2L["3"]["CanvasPosition"] = Vector2.new(0, 68);
 G2L["3"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46);
 G2L["3"]["Name"] = [[RightNavigation]];
 G2L["3"]["Size"] = UDim2.new(0.72811, 0, 0.77778, 0);
 G2L["3"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["3"]["Position"] = UDim2.new(0.25576, 0, 0.20261, 0);
 G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3"]["ScrollBarThickness"] = 5;
+G2L["3"]["ScrollBarThickness"] = 0;
 
 
 -- StarterGui.ScreenGui.Frame.RightNavigation.UIListLayout
