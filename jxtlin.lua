@@ -976,6 +976,7 @@ local script = G2L["1c"];
 		if Enabled then
 			-- When a 'button' is added to the 'safezone' parent
 			if Descendant.Name == 'button' and Descendant.Parent.Name == 'safezone' then
+				-- We don't need task.wait here anymore; it's an event-driven action
 				GuiService.SelectedObject = Descendant
 				VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
 				VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
