@@ -1321,6 +1321,7 @@ local script = G2L["4b"];
 	local scrollingFrame = script.Parent -- Reference to the ScrollingFrame
 	local players = game:GetService("Players") -- Reference to the Players service
 	local localPlayer = players.LocalPlayer -- The player using this script
+	local existingPlayerButtons = {} -- Cache to track current buttons
 	
 	-- Function to create a button for a player
 	local function createPlayerButton(player)
@@ -1334,6 +1335,9 @@ local script = G2L["4b"];
 		button.Font = Enum.Font.SourceSans
 		button.TextSize = 14.000
 		button.Parent = scrollingFrame
+	
+		-- Store the button in the cache
+		existingPlayerButtons[player.Name] = button
 	
 		-- When the button is clicked
 		button.MouseButton1Click:Connect(function()
@@ -1356,33 +1360,45 @@ local script = G2L["4b"];
 		end)
 	end
 	
-	-- Function to populate buttons
-	local function populateButtons()
-		-- Clear existing buttons
-		for _, child in pairs(scrollingFrame:GetChildren()) do
-			if child:IsA("TextButton") then
-				child:Destroy()
+	-- Function to clear buttons
+	local function clearPlayerButtons()
+		for _, button in pairs(existingPlayerButtons) do
+			if button and button.Parent then
+				button:Destroy()
 			end
 		end
+		existingPlayerButtons = {}
+	end
 	
-		-- Create a button for each player, excluding the local player
-		for _, player in pairs(players:GetPlayers()) do
+	-- Function to refresh buttons
+	local function refreshPlayerButtons()
+		local currentPlayers = players:GetPlayers()
+	
+		-- Clear buttons and recreate only if the player list has changed
+		clearPlayerButtons()
+		for _, player in pairs(currentPlayers) do
 			createPlayerButton(player)
 		end
 	end
 	
-	-- Populate buttons initially
-	populateButtons()
-	
-	-- Update when players join or leave
-	players.PlayerAdded:Connect(function(player)
-		if player ~= localPlayer then -- Exclude the local player
-			createPlayerButton(player)
+	-- Periodic update loop
+	task.spawn(function()
+		while true do
+			refreshPlayerButtons()
+			task.wait(120) -- Update every 2 minutes
 		end
 	end)
 	
-	players.PlayerRemoving:Connect(function(player)
-		populateButtons() -- Rebuild the list
+	-- Initial population
+	refreshPlayerButtons()
+	
+	-- Update when players join or leave
+	players.PlayerAdded:Connect(function()
+		refreshPlayerButtons()
+	end)
+	
+	players.PlayerRemoving:Connect(function()
+		refreshPlayerButtons()
 	end)
 	
 end;
