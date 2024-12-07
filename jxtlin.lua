@@ -562,7 +562,6 @@ G2L["38"]["Visible"] = false;
 G2L["38"]["Active"] = true;
 G2L["38"]["BorderSizePixel"] = 0;
 G2L["38"]["CanvasSize"] = UDim2.new(0, 0, 1, 0);
-G2L["38"]["CanvasPosition"] = Vector2.new(0, 114);
 G2L["38"]["BackgroundColor3"] = Color3.fromRGB(40, 42, 44);
 G2L["38"]["Name"] = [[ChooseIsland]];
 G2L["38"]["Size"] = UDim2.new(0, 92, 0, 172);
@@ -2034,10 +2033,10 @@ local script = G2L["69"];
 		button.BackgroundColor3 = Color3.fromRGB(0, 255, 0)  -- Green color
 	end
 	
-	-- Function to optimize the parts
+	-- Function to recursively optimize parts in the workspace, including objects in models or folders
 	local function optimizeParts()
-		-- Loop through all the objects in the Workspace
-		for _, obj in ipairs(workspace:GetChildren()) do
+		-- Recursive function to loop through all objects in a given parent
+		local function processObject(obj)
 			-- Check if the object is a Part, MeshPart, or any other shape object
 			if obj:IsA("BasePart") then
 				-- Change the Material to SmoothPlastic (smooth edge)
@@ -2059,6 +2058,16 @@ local script = G2L["69"];
 					obj.TextureID = ""
 				end
 			end
+	
+			-- If the object is a model, folder, or any container, recurse into it
+			for _, child in ipairs(obj:GetChildren()) do
+				processObject(child)
+			end
+		end
+	
+		-- Start the optimization from the workspace itself
+		for _, obj in ipairs(workspace:GetChildren()) do
+			processObject(obj)
 		end
 	end
 	
