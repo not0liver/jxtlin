@@ -1235,11 +1235,13 @@ local script = G2L["8"];
 	local teleportframe = script.Parent.Parent.Parent.Teleport
 	local fishframe = script.Parent.Parent.Parent.FishFrame
 	local playerframe = script.Parent.Parent.Parent.PlayerF
+	local optiframe = script.Parent.Parent.Parent.OptimizationT
 	
 	script.Parent.MouseButton1Click:Connect(function()
 		teleportframe.Visible = true
 		fishframe.Visible = false
 		playerframe.Visible = false
+		optiframe.Visible = false
 	end)
 end;
 task.spawn(C_8);
@@ -2024,59 +2026,35 @@ task.spawn(C_63);
 -- StarterGui.ScreenGui.MainFrame.OptimizationT.Smooth.TextButton.LocalScript
 local function C_69()
 local script = G2L["69"];
-	-- Reference to the button in the GUI
-	local button = script.Parent  -- assuming the script is inside the button
+	local button = script.Parent
 	local workspace = game:GetService("Workspace")
 	
-	-- Function to change the button color to green
 	local function changeButtonColor()
-		button.BackgroundColor3 = Color3.fromRGB(0, 255, 0)  -- Green color
+		button.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 	end
 	
-	-- Function to recursively optimize parts in the workspace, including objects in models or folders
 	local function optimizeParts()
-		-- Recursive function to loop through all objects in a given parent
 		local function processObject(obj)
-			-- Check if the object is a Part, MeshPart, or any other shape object
 			if obj:IsA("BasePart") then
-				-- Change the Material to SmoothPlastic (smooth edge)
 				obj.Material = Enum.Material.SmoothPlastic
 	
-				-- Optional: Change the Color to something neutral if you want
-				obj.Color = Color3.fromRGB(128, 128, 128)
-	
-				-- Remove any Decals or Textures attached to the part
-				for _, decal in ipairs(obj:GetChildren()) do
-					if decal:IsA("Decal") or decal:IsA("Texture") then
-						decal:Destroy()
-					end
-				end
-	
-				-- Optional: If you want to remove MeshId to prevent rendering meshes
 				if obj:IsA("MeshPart") then
-					obj.MeshId = ""
-					obj.TextureID = ""
+					obj.Material = Enum.Material.Plastic
 				end
 			end
 	
-			-- If the object is a model, folder, or any container, recurse into it
 			for _, child in ipairs(obj:GetChildren()) do
 				processObject(child)
 			end
 		end
 	
-		-- Start the optimization from the workspace itself
 		for _, obj in ipairs(workspace:GetChildren()) do
 			processObject(obj)
 		end
 	end
 	
-	-- Connect the button click event
 	button.MouseButton1Click:Connect(function()
-		-- Change the button color to green
 		changeButtonColor()
-	
-		-- Optimize the parts in the workspace
 		optimizeParts()
 	end)
 	
