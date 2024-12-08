@@ -163,6 +163,7 @@ G2L["13"]["Color"] = Color3.fromRGB(210, 210, 210);
 
 -- StarterGui.ScreenGui.MainFrame.FischFrame
 G2L["14"] = Instance.new("ScrollingFrame", G2L["2"]);
+G2L["14"]["Visible"] = false;
 G2L["14"]["Active"] = true;
 G2L["14"]["BorderSizePixel"] = 0;
 G2L["14"]["BackgroundColor3"] = Color3.fromRGB(41, 54, 80);
@@ -597,7 +598,6 @@ G2L["3e"]["Name"] = [[Terrapin]];
 
 -- StarterGui.ScreenGui.MainFrame.Players
 G2L["3f"] = Instance.new("ScrollingFrame", G2L["2"]);
-G2L["3f"]["Visible"] = false;
 G2L["3f"]["Active"] = true;
 G2L["3f"]["BorderSizePixel"] = 0;
 G2L["3f"]["BackgroundColor3"] = Color3.fromRGB(41, 54, 80);
@@ -624,45 +624,43 @@ G2L["41"] = Instance.new("UICorner", G2L["40"]);
 G2L["41"]["CornerRadius"] = UDim.new(0, 4);
 
 
--- StarterGui.ScreenGui.MainFrame.Players.Infinite Jump.TextLabel
-G2L["42"] = Instance.new("TextLabel", G2L["40"]);
+-- StarterGui.ScreenGui.MainFrame.Players.Infinite Jump.TextButton
+G2L["42"] = Instance.new("TextButton", G2L["40"]);
 G2L["42"]["TextWrapped"] = true;
 G2L["42"]["BorderSizePixel"] = 0;
-G2L["42"]["TextScaled"] = true;
-G2L["42"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["42"]["TextSize"] = 14;
-G2L["42"]["FontFace"] = Font.new([[rbxasset://fonts/families/FredokaOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["42"]["TextColor3"] = Color3.fromRGB(226, 226, 226);
-G2L["42"]["BackgroundTransparency"] = 1;
-G2L["42"]["Size"] = UDim2.new(0, 80, 0, 40);
+G2L["42"]["TextScaled"] = true;
+G2L["42"]["BackgroundColor3"] = Color3.fromRGB(86, 86, 86);
+G2L["42"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["42"]["Size"] = UDim2.new(0, 48, 0, 14);
 G2L["42"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["42"]["Text"] = [[Infinite Jump]];
-G2L["42"]["Position"] = UDim2.new(0, 6, 0, 0);
-
-
--- StarterGui.ScreenGui.MainFrame.Players.Infinite Jump.TextButton
-G2L["43"] = Instance.new("TextButton", G2L["40"]);
-G2L["43"]["TextWrapped"] = true;
-G2L["43"]["BorderSizePixel"] = 0;
-G2L["43"]["TextSize"] = 14;
-G2L["43"]["TextColor3"] = Color3.fromRGB(226, 226, 226);
-G2L["43"]["TextScaled"] = true;
-G2L["43"]["BackgroundColor3"] = Color3.fromRGB(86, 86, 86);
-G2L["43"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["43"]["Size"] = UDim2.new(0, 48, 0, 14);
-G2L["43"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["43"]["Text"] = [[]];
-G2L["43"]["Position"] = UDim2.new(0, 365, 0, 13);
+G2L["42"]["Text"] = [[]];
+G2L["42"]["Position"] = UDim2.new(0, 365, 0, 13);
 
 
 -- StarterGui.ScreenGui.MainFrame.Players.Infinite Jump.TextButton.UICorner
-G2L["44"] = Instance.new("UICorner", G2L["43"]);
+G2L["43"] = Instance.new("UICorner", G2L["42"]);
 
 
 
 -- StarterGui.ScreenGui.MainFrame.Players.Infinite Jump.TextButton.LocalScript
-G2L["45"] = Instance.new("LocalScript", G2L["43"]);
+G2L["44"] = Instance.new("LocalScript", G2L["42"]);
 
+
+
+-- StarterGui.ScreenGui.MainFrame.Players.Infinite Jump.TextButton.TextLabel
+G2L["45"] = Instance.new("TextLabel", G2L["42"]);
+G2L["45"]["BorderSizePixel"] = 0;
+G2L["45"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["45"]["TextSize"] = 14;
+G2L["45"]["FontFace"] = Font.new([[rbxasset://fonts/families/FredokaOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["45"]["TextColor3"] = Color3.fromRGB(211, 211, 211);
+G2L["45"]["BackgroundTransparency"] = 1;
+G2L["45"]["Size"] = UDim2.new(0, 78, 0, 42);
+G2L["45"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["45"]["Text"] = [[Infinite Jump]];
+G2L["45"]["Position"] = UDim2.new(-7.47917, 0, -0.92857, 0);
 
 
 -- StarterGui.ScreenGui.MainFrame.Players.UIListLayout
@@ -1377,8 +1375,8 @@ local script = G2L["3e"];
 end;
 task.spawn(C_3e);
 -- StarterGui.ScreenGui.MainFrame.Players.Infinite Jump.TextButton.LocalScript
-local function C_45()
-local script = G2L["45"];
+local function C_44()
+local script = G2L["44"];
 	-- Reference to the button
 	local button = script.Parent
 	
@@ -1420,7 +1418,7 @@ local script = G2L["45"];
 	button.MouseButton1Click:Connect(toggleInfiniteJump)
 	
 end;
-task.spawn(C_45);
+task.spawn(C_44);
 -- StarterGui.ScreenGui.MainFrame.Optimization.RemoveTexture.TextButton.LocalScript
 local function C_4c()
 local script = G2L["4c"];
